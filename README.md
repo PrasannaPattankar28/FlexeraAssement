@@ -36,3 +36,9 @@ Brief description of your project.
 1. Clone the repository:
    ```bash
    git clone https://github.com/PrasannaPattankar28/FlexeraAssement.git
+2. Install the packages
+   npm install
+3. Run the project
+   npm start
+4. Run the unit test cases
+   npm test
