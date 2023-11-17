@@ -39,6 +39,6 @@ Brief description of your project.
 2. Install the packages
   - npm install
 3. Run the project
-   -npm start
+   - npm start
 4. Run the unit test cases
-   -npm test
+   - npm test
