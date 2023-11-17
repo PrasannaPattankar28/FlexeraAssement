@@ -2,7 +2,10 @@
 Build a simple application that lists some results provided by the GitHub API:
 # GitHub Repository Name
 - FlexeraAssement
-Brief description of your project.
+# Brief description of your project.
+- Build a simple application that lists some results provided by the GitHub API
+- This application should allow the user to paginate results (10 results per page).
+
 
 ## Table of Contents
 
