@@ -1,4 +1,10 @@
-// src/components/__tests__/GitHubRepoList.test.tsx
+/**
+ * GitHubRepoList.test.tsx
+ * Copyright (c) 2023 Flexera Assigment
+ *
+ * Description : This file includes Logic of List of some results which is provided by the Github API and test cases for the same
+ */
+
 import React from 'react';
 import { fireEvent, render, screen } from '@testing-library/react';
 import GitHubRepoList from '../GitHubRepoList';

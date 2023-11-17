@@ -4,12 +4,17 @@
  *
  * Description : This file includes Logic of List of some results which is provided by the Github API
  */
+
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import GitHubRepoListItem from "./GitHubRepoListItem";
 import "./GitHubRepoList.css";
+import Pagination from "./Pagination";
 
 
-// Define the shape of a GitHub repository
+/* Description : Define the shape of a GitHub repository
+*
+*/
 interface Repository {
   id: number;
   full_name: string;
@@ -18,13 +23,13 @@ interface Repository {
     avatar_url: string;
   };
 }
-
 /**
  *Description: Define the shape of the flags object
  */
 interface Flags {
   [key: number]: boolean;
 }
+
 /** 
  *Description: State for repositories, current page, and flags
  Retrieve stored flags from local storage or default to an empty object
@@ -36,7 +41,8 @@ const GitHubRepoList: React.FC = () => {
     const storedFlags = localStorage.getItem("githubRepoFlags");
     return storedFlags ? JSON.parse(storedFlags) : {};
   });
-  /**
+
+   /**
    *Description: Fetch repositories from GitHub API when the page changes
    */
 
@@ -59,7 +65,8 @@ const GitHubRepoList: React.FC = () => {
 
     fetchRepos();
   }, [page]);
-  /**
+
+   /**
    *  Description: Toggle the flag for a specific repository
    *  Create a new flags object with the updated flag for the specific repository
    *  Store the updated flags in local storage
@@ -67,12 +74,12 @@ const GitHubRepoList: React.FC = () => {
   const handleToggleFlag = (id: number) => {
     setFlags((prevFlags) => {
       const newFlags = { ...prevFlags, [id]: !prevFlags[id] };
-
       localStorage.setItem("githubRepoFlags", JSON.stringify(newFlags));
       return newFlags;
     });
   };
-/**
+
+  /**
    *  Description: 
    *   Header 
    *   List of repositories
@@ -89,47 +96,16 @@ const GitHubRepoList: React.FC = () => {
       <h1>GitHub Repository List</h1>
       <ul className="repo-list">
         {repos.map((repo) => (
-          <li key={repo.id} className="repo-item">
-            <img src={repo.owner.avatar_url} alt="Owner Avatar" />
-
-            <div className="repo-info">
-              {/* Repository full name */}
-              <h3>{repo.full_name}</h3>
-              <p className="description">{repo.description}</p>
-            </div>
-
-            {/* Flag button */}
-            <button
-              onClick={() => handleToggleFlag(repo.id)}
-              className={
-                flags[repo.id] ? "flag-button selected" : "flag-button"
-              }
-            >
-              {/* Display checkmark if the flag is set, otherwise display plus symbol */}
-              {flags[repo.id] ? "✔" : "+"}
-            </button>
-          </li>
+          <GitHubRepoListItem
+            key={repo.id}
+            repo={repo}
+            flags={flags}
+            handleToggleFlag={handleToggleFlag}
+          />
         ))}
       </ul>
+      <Pagination page={page} setPage={setPage} />
 
-      {/* Pagination */}
-      <div className="pagination">
-        {/* Previous page button with left arrow symbol */}
-        <button
-          onClick={() => setPage((prevPage) => prevPage - 1)}
-          disabled={page === 1}
-        >
-          &#8592; {/* Left arrow symbol */}
-        </button>
-
-        {/* Display current page number */}
-        <span>Page {page}</span>
-
-        {/* Next page button with right arrow symbol */}
-        <button onClick={() => setPage((prevPage) => prevPage + 1)}>
-          &#8594; {/* Right arrow symbol */}
-        </button>
-      </div>
     </div>
   );
 };

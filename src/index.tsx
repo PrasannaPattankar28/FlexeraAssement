@@ -1,5 +1,5 @@
 /**
- * GitHubRepoList.tsx
+ * index.tsx
  * Copyright (c) 2023 Flexera Assigment
  *
  * Description : This file includes Index and root directory of Project

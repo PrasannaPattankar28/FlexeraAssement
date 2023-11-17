@@ -1,4 +1,10 @@
-/* src/components/GitHubRepoList.css */
+/**
+ * GitHubRepoList.css
+ * Copyright (c) 2023 Flexera Assigment
+ *
+ * Description : This file includes css of different items which we get from an api and arranging that in particular grid
+ */
+
 .repo-list {
     list-style: none;
     padding: 0;
